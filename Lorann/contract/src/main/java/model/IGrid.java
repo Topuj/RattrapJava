@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * @author Jean-Aymeric DIET jadiet@cesi.fr
  * @version 1.0
  */
-public interface IModel {
+public interface IGrid {
 
     /**
      * Gets the example by id.
@@ -41,4 +42,21 @@ public interface IModel {
      *             the SQL exception
      */
     List<Example> getAllExamples() throws SQLException;
+    
+    public int getWidth();
+
+    public int getHeight();
+
+    public void setWidth(int width);
+
+    public void setHeight(int height);
+
+    public IMotionLess getMatrixXY(int x, int y);
+
+    public void setMatrixXY(final IMotionLess motionLess, final int x, final int y);
+
+    public ArrayList<ILightCycle> getLightCycle();
+
+
+    ILightCycle getMobileByPlayer(int player);
 }

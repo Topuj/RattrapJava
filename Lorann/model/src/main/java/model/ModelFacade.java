@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.ExampleDAO;
@@ -11,7 +12,7 @@ import model.dao.ExampleDAO;
  * @author Jean-Aymeric DIET jadiet@cesi.fr
  * @version 1.0
  */
-public final class ModelFacade implements IModel {
+public final class ModelFacade implements IGrid {
 
     /**
      * Instantiates a new model facade.
@@ -22,6 +23,7 @@ public final class ModelFacade implements IModel {
 
     /*
      * (non-Javadoc)
+     *
      * @see model.IModel#getExampleById(int)
      */
     @Override
@@ -31,6 +33,7 @@ public final class ModelFacade implements IModel {
 
     /*
      * (non-Javadoc)
+     *
      * @see model.IModel#getExampleByName(java.lang.String)
      */
     @Override
@@ -40,11 +43,60 @@ public final class ModelFacade implements IModel {
 
     /*
      * (non-Javadoc)
+     *
      * @see model.IModel#getAllExamples()
      */
     @Override
     public List<Example> getAllExamples() throws SQLException {
         return ExampleDAO.getAllExamples();
+    }
+
+    @Override
+    public ILightCycle getMobileByPlayer(final int player) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int getWidth() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void setWidth(final int width) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setHeight(final int height) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public IMotionLess getMatrixXY(final int x, final int y) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void setMatrixXY(final IMotionLess motionLess, final int x, final int y) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public ArrayList<ILightCycle> getLightCycle() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

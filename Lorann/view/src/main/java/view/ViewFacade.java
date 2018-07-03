@@ -26,4 +26,10 @@ public class ViewFacade implements IView {
         JOptionPane.showMessageDialog(null, message);
     }
 
+	@Override
+	public void closeAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
