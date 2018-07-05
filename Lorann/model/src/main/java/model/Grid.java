@@ -5,16 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import view.ElementGrid;
+
 public class Grid extends Observable implements IGrid {
     private int                          width;
     private int                          height;
     private IMotionLess[][]              matrix;
-    private final ArrayList<ILightCycle> lightCycle;
+    private final ArrayList<ILightCycle> lightCycles;
 
     public Grid(final int width, final int height) {
         this.width = width;
         this.height = height;
-        this.lightCycle = new ArrayList<ILightCycle>();
+        this.lightCycles = new ArrayList<ILightCycle>();
         // TODO Auto-generated constructor stub
     }
 
@@ -52,7 +54,7 @@ public class Grid extends Observable implements IGrid {
 
     @Override
     public ArrayList<ILightCycle> getLightCycle() {
-        return this.lightCycle;
+        return this.lightCycles;
     }
 
     @Override
@@ -74,9 +76,33 @@ public class Grid extends Observable implements IGrid {
     }
 
     @Override
-    public ILightCycle getMobileByPlayer(final int player) {
-        // TODO Auto-generated method stub
+    public ILightCycle getLightCycleByPlayer(final int player) {
+        for (final ILightCycle lightCycle : this.lightCycles) {
+            if (lightCycle.isPlayer(player)) {
+
+            }
+        }
         return null;
+    }
+
+    @Override
+    public void addWall(final int player) {
+        this.setMatrixXY(ElementGrid.getElementGridByPlayer(player),
+                this.getLightCycleByPlayer(player).getPosition().getX(),
+                this.getLightCycleByPlayer(player).getPosition().getY());
+
+    }
+
+    @Override
+    public void setLightCyclesHaveMoved() {
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    @Override
+    public void addLightCycle(final ILightCycle lightCycle) {
+        this.lightCycles.add(lightCycle);
+        lightCycle.setGrid(this);
     }
 
 }

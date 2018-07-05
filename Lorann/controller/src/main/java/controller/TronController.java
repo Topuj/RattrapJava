@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Direction;
 import model.IGrid;
 import model.ILightCycle;
@@ -19,9 +21,9 @@ public class TronController implements IOrderPerformer, IController {
     @Override
     public void orderPerform(final IUserOrder userOrder) {
         if (userOrder != null) {
-            final ILightCycle lightCycle = this.grid.getMobileByPlayer(userOrder.getPlayer());
+            final ILightCycle lightCycle = this.grid.getLightCycleByPlayer(userOrder.getPlayer());
             if (lightCycle != null) {
-                Direction direction;
+                int direction;
                 switch (userOrder.getOrder()) {
                 case RIGHT:
                     direction = (Direction.RIGHT.ordinal() + 1) % 4;
@@ -31,19 +33,23 @@ public class TronController implements IOrderPerformer, IController {
                     break;
                 case NOP:
                 default:
-                    direction = this.grid.getMobileByPlayer(userOrder.getPlayer()).getDirection();
+                    direction = this.grid.getLightCycleByPlayer(userOrder.getPlayer()).getDirection();
                     break;
                 }
+                lightCycle.setDirection(direction);
+
             }
         }
     }
 
+    @Override
     public void play() {
         this.gameLoop();
         this.view.displayMessage("Game Over");
         this.view.closeAll();
     }
 
+    @Override
     public void gameLoop() {
         while (!this.isGameOver) {
             try {
@@ -51,6 +57,22 @@ public class TronController implements IOrderPerformer, IController {
             } catch (final InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
+
+            final ArrayList<ILightCycle> initialLightCycles = new ArrayList<ILightCycle>();
+            for (final ILightCycle lightCycle : this.grid.getLightCycle()) {
+                initialLightCycles.add(lightCycle);
+                this.grid.addWall(0);
+                this.grid.addWall(1);
+            }
+            for (final ILightCycle lightCycle : initialLightCycles) {
+                lightCycle.move();
+            }
+            this.grid.setLightCyclesHaveMoved();
         }
+    }
+
+    @Override
+    public void setView(final IView view) {
+        this.view = view;
     }
 }

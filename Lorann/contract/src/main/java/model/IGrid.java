@@ -42,7 +42,7 @@ public interface IGrid {
      *             the SQL exception
      */
     List<Example> getAllExamples() throws SQLException;
-    
+
     public int getWidth();
 
     public int getHeight();
@@ -57,6 +57,11 @@ public interface IGrid {
 
     public ArrayList<ILightCycle> getLightCycle();
 
+    ILightCycle getLightCycleByPlayer(int player);
 
-    ILightCycle getMobileByPlayer(int player);
+    public void setLightCyclesHaveMoved();
+
+    public void addWall(final int player);
+
+    public void addLightCycle(final ILightCycle lightCycle);
 }

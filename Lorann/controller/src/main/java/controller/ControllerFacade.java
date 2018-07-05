@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Example;
 import model.IGrid;
+import view.IUserOrder;
 import view.IView;
 
 /**
@@ -72,5 +73,29 @@ public class ControllerFacade implements IController {
      */
     public IGrid getGrid() {
         return this.grid;
+    }
+
+    @Override
+    public void orderPerform(final IUserOrder userOrder) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void play() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void gameLoop() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setView(final IView view) {
+        // TODO Auto-generated method stub
+
     }
 }

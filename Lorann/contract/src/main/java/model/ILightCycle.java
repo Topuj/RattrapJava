@@ -4,8 +4,6 @@ import java.awt.Color;
 
 public interface ILightCycle {
 
-    public IGrid getGrid();
-
     public Boolean getAlive();
 
     public Color getColor();
@@ -14,16 +12,18 @@ public interface ILightCycle {
 
     public void move();
 
-    public void moveUp();
+    public int getDirection();
 
-    public void moveDown();
+    public void setDirection(int direction);
 
-    public void moveRight();
+    public IPosition getPosition();
 
-    public void moveLeft();
+    public void setPosition(IPosition position);
 
-    public Direction getDirection();
+    public boolean isPlayer(final int player);
 
-    public void setDirection(Direction direction);
+    public IGrid getGrid();
+
+    public void setGrid(IGrid grid);
 
 }

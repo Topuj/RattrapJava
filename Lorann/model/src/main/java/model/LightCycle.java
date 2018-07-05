@@ -3,23 +3,20 @@ package model;
 import java.awt.Color;
 
 public class LightCycle implements ILightCycle {
-    private final IGrid    grid;
-    private Boolean        alive;
-    private final Color    color;
-    private final Position position;
-    private Direction      direction;
+    private Boolean     alive;
+    private final Color color;
+    private IPosition   position;
+    private IGrid       grid;
+    private final int   direction;
+    private final int   player;
 
-    LightCycle(final IGrid grid, final Position position, final Color color) {
-        this.grid = grid;
+    public LightCycle(final int direction, final IPosition position, final Color color, final int player) {
+        this.direction = direction;
         this.color = color;
         this.position = position;
         this.alive = true;
+        this.player = player;
 
-    }
-
-    @Override
-    public IGrid getGrid() {
-        return this.grid;
     }
 
     @Override
@@ -40,16 +37,16 @@ public class LightCycle implements ILightCycle {
     @Override
     public void move() {
         switch (this.direction) {
-        case UP:
+        case 0:
             this.moveUp();
             break;
-        case RIGHT:
+        case 1:
             this.moveRight();
             break;
-        case DOWN:
+        case 2:
             this.moveDown();
             break;
-        case LEFT:
+        case 3:
             this.moveLeft();
             break;
         default:
@@ -58,43 +55,65 @@ public class LightCycle implements ILightCycle {
 
     }
 
-    @Override
-    public void moveUp() {
+    private void moveUp() {
         this.position.setY(this.position.getY() + 1);
         // TODO Auto-generated method stub
 
     }
 
-    @Override
-    public void moveDown() {
+    private void moveDown() {
         this.position.setY(this.position.getY() - 1);
         // TODO Auto-generated method stub
 
     }
 
-    @Override
-    public void moveRight() {
+    private void moveRight() {
         this.position.setX(this.position.getX() + 1);
         // TODO Auto-generated method stub
 
     }
 
-    @Override
-    public void moveLeft() {
+    private void moveLeft() {
         this.position.setX(this.position.getX() - 1);
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public Direction getDirection() {
+    public int getDirection() {
         return this.direction;
     }
 
     @Override
-    public void setDirection(final Direction direction) {
+    public void setDirection(final int direction) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public IPosition getPosition() {
+        return this.position;
+    }
+
+    @Override
+    public void setPosition(final IPosition position) {
+        this.position = position;
+
+    }
+
+    @Override
+    public boolean isPlayer(final int player) {
+        return this.player == player;
+    }
+
+    @Override
+    public IGrid getGrid() {
+        return this.grid;
+    }
+
+    @Override
+    public void setGrid(final IGrid grid) {
+        this.grid = grid;
     }
 
 }

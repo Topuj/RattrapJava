@@ -52,7 +52,7 @@ public final class ModelFacade implements IGrid {
     }
 
     @Override
-    public ILightCycle getMobileByPlayer(final int player) {
+    public ILightCycle getLightCycleByPlayer(final int player) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -97,6 +97,24 @@ public final class ModelFacade implements IGrid {
     public ArrayList<ILightCycle> getLightCycle() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void setLightCyclesHaveMoved() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addWall(final int player) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addLightCycle(final ILightCycle lightCycle) {
+        // TODO Auto-generated method stub
+
     }
 
 }
