@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import view.IUserOrder;
 import view.IView;
 
@@ -15,7 +17,7 @@ public interface IController {
 
     public void checkCollision();
 
-    public void play();
+    public void play() throws SQLException;
 
     public void gameLoop();
 

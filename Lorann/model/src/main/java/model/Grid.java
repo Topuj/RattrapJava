@@ -2,8 +2,9 @@ package model;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
+
+import model.dao.TronDAO;
 
 public class Grid extends Observable implements IGrid {
     private int                          width;
@@ -39,8 +40,6 @@ public class Grid extends Observable implements IGrid {
 
     @Override
     public IMotionLess getMatrixXY(final int x, final int y) {
-        System.out.println("x:" + x);
-        System.out.println("y:" + y);
         return this.matrix[x][y];
     }
 
@@ -64,24 +63,6 @@ public class Grid extends Observable implements IGrid {
     @Override
     public ArrayList<ILightCycle> getLightCycles() {
         return this.lightCycles;
-    }
-
-    @Override
-    public Example getExampleById(final int id) throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Example getExampleByName(final String name) throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Example> getAllExamples() throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
@@ -112,6 +93,11 @@ public class Grid extends Observable implements IGrid {
     public void addLightCycle(final ILightCycle lightCycle) {
         this.lightCycles.add(lightCycle);
         lightCycle.setGrid(this);
+    }
+
+    @Override
+    public void setResult(final int player, final long time) throws SQLException {
+        TronDAO.setResult(player, time);
     }
 
 }

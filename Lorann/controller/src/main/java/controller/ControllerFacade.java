@@ -1,9 +1,7 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.List;
 
-import model.Example;
 import model.IGrid;
 import view.IUserOrder;
 import view.IView;
@@ -38,26 +36,6 @@ public class ControllerFacade implements IController {
     }
 
     /**
-     * Start.
-     *
-     * @throws SQLException
-     *             the SQL exception
-     */
-    public void start() throws SQLException {
-        this.getView().displayMessage(this.getGrid().getExampleById(1).toString());
-
-        this.getView().displayMessage(this.getGrid().getExampleByName("Example 2").toString());
-
-        final List<Example> examples = this.getGrid().getAllExamples();
-        final StringBuilder message = new StringBuilder();
-        for (final Example example : examples) {
-            message.append(example);
-            message.append('\n');
-        }
-        this.getView().displayMessage(message.toString());
-    }
-
-    /**
      * Gets the view.
      *
      * @return the view
@@ -82,7 +60,7 @@ public class ControllerFacade implements IController {
     }
 
     @Override
-    public void play() {
+    public void play() throws SQLException {
         // TODO Auto-generated method stub
 
     }

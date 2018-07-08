@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import model.IGrid;
 import model.ILightCycle;
 import view.IUserOrder;
@@ -56,14 +58,17 @@ public class TronController implements IOrderPerformer, IController {
     }
 
     @Override
-    public void play() {
+    public void play() throws SQLException {
+        final long begin = System.currentTimeMillis();
         this.gameLoop();
         if (!this.grid.getLightCycleByPlayer(0).isAlive() && !this.grid.getLightCycleByPlayer(1).isAlive()) {
             this.view.displayMessage("Tie !!! Replay");
         } else if (!this.grid.getLightCycleByPlayer(0).isAlive()) {
             this.view.displayMessage("Player 2 wins");
+            this.grid.setResult(2, (System.currentTimeMillis() - begin) / 1000);
         } else if (!this.grid.getLightCycleByPlayer(1).isAlive()) {
             this.view.displayMessage("Player 1 wins");
+            this.grid.setResult(1, (System.currentTimeMillis() - begin) / 1000);
         }
         this.view.closeAll();
     }

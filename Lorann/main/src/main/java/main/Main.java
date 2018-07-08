@@ -31,7 +31,11 @@ public abstract class Main {
         grid.addLightCycle(new LightCycle(2, new Position(100, 200), Color.MAGENTA, 1));
         final TronController controller = new TronController(grid);
         controller.setView(new TronView(controller, grid, grid));
-        controller.play();
+        try {
+            controller.play();
+        } catch (final SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 
 }
