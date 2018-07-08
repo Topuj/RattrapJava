@@ -5,19 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import view.ElementGrid;
-
 public class Grid extends Observable implements IGrid {
     private int                          width;
     private int                          height;
-    private IMotionLess[][]              matrix;
+    private final IMotionLess[][]        matrix;
     private final ArrayList<ILightCycle> lightCycles;
 
     public Grid(final int width, final int height) {
         this.width = width;
         this.height = height;
         this.lightCycles = new ArrayList<ILightCycle>();
-        // TODO Auto-generated constructor stub
+        this.matrix = new IMotionLess[width][height];
+        for (int x = 0; x < this.width; x++) {
+            for (int y = 0; y < this.height; y++) {
+                if ((x == 0) || (x == (this.width - 1)) || (y == 0) || (y == (this.height - 1))) {
+                    this.setMatrixXY(ElementGrid.WALL, x, y);
+                } else {
+                    this.setMatrixXY(ElementGrid.GROUND, x, y);
+                }
+            }
+        }
     }
 
     @Override
@@ -32,6 +39,8 @@ public class Grid extends Observable implements IGrid {
 
     @Override
     public IMotionLess getMatrixXY(final int x, final int y) {
+        System.out.println("x:" + x);
+        System.out.println("y:" + y);
         return this.matrix[x][y];
     }
 
@@ -53,7 +62,7 @@ public class Grid extends Observable implements IGrid {
     }
 
     @Override
-    public ArrayList<ILightCycle> getLightCycle() {
+    public ArrayList<ILightCycle> getLightCycles() {
         return this.lightCycles;
     }
 
@@ -79,7 +88,7 @@ public class Grid extends Observable implements IGrid {
     public ILightCycle getLightCycleByPlayer(final int player) {
         for (final ILightCycle lightCycle : this.lightCycles) {
             if (lightCycle.isPlayer(player)) {
-
+                return lightCycle;
             }
         }
         return null;

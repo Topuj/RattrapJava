@@ -1,7 +1,6 @@
 package model;
 
-import view.ElementGrid;
-
 public interface IMotionLess {
-	
+    public boolean isWall();
+
 }

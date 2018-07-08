@@ -30,7 +30,7 @@ public class EventPerformer implements IEventPerformer {
             userOrder = new UserOrder(0, Order.RIGHT);
             break;
         case KeyEvent.VK_Q:
-            userOrder = new UserOrder(1, Order.RIGHT);
+            userOrder = new UserOrder(1, Order.LEFT);
             break;
         case KeyEvent.VK_D:
             userOrder = new UserOrder(1, Order.RIGHT);

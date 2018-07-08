@@ -27,7 +27,8 @@ public class TronView implements IView, Runnable {
 
     @Override
     public void run() {
-        this.easyFrame = new EasyFrame("Tron", this.eventPerformer, this.tronGraphicsBuilder, null, this.observable);
+        this.easyFrame = new EasyFrame("Tron", this.eventPerformer, this.tronGraphicsBuilder, this.grid,
+                this.observable);
         // TODO Auto-generated method stub
 
     }
@@ -49,13 +50,5 @@ public class TronView implements IView, Runnable {
 
     public void setGrid(final IGrid grid) throws IOException {
         this.grid = grid;
-        for (int x = 0; x < this.getGrid().getWidth(); x++) {
-            for (int y = 0; y < this.getGrid().getHeight(); y++) {
-                if ((x == 0) || (x == 400) || (y == 0) || (y == 600)) {
-                    this.getGrid().setMatrixXY(ElementGrid.WALL, x, y);
-                }
-                this.getGrid().setMatrixXY(ElementGrid.GROUND, x, y);
-            }
-        }
     }
 }

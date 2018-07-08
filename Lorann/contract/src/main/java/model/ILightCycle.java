@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public interface ILightCycle {
 
-    public Boolean getAlive();
+    public Boolean isAlive();
 
     public Color getColor();
 
@@ -14,7 +14,7 @@ public interface ILightCycle {
 
     public int getDirection();
 
-    public void setDirection(int direction);
+    public int setDirection(int direction);
 
     public IPosition getPosition();
 

@@ -27,8 +27,8 @@ public abstract class Main {
      */
     public static void main(final String[] args) throws SQLException {
         final Grid grid = new Grid(Main.width, Main.height);
-        grid.addLightCycle(new LightCycle(1, new Position(50, 50), Color.GREEN, 0));
-        grid.addLightCycle(new LightCycle(3, new Position(300, 500), Color.MAGENTA, 1));
+        grid.addLightCycle(new LightCycle(2, new Position(50, 50), Color.GREEN, 0));
+        grid.addLightCycle(new LightCycle(2, new Position(100, 200), Color.MAGENTA, 1));
         final TronController controller = new TronController(grid);
         controller.setView(new TronView(controller, grid, grid));
         controller.play();

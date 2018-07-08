@@ -94,7 +94,7 @@ public final class ModelFacade implements IGrid {
     }
 
     @Override
-    public ArrayList<ILightCycle> getLightCycle() {
+    public ArrayList<ILightCycle> getLightCycles() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -116,5 +116,4 @@ public final class ModelFacade implements IGrid {
         // TODO Auto-generated method stub
 
     }
-
 }

@@ -55,7 +55,7 @@ public interface IGrid {
 
     public void setMatrixXY(final IMotionLess motionLess, final int x, final int y);
 
-    public ArrayList<ILightCycle> getLightCycle();
+    public ArrayList<ILightCycle> getLightCycles();
 
     ILightCycle getLightCycleByPlayer(int player);
 

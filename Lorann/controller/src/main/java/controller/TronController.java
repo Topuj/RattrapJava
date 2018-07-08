@@ -1,18 +1,15 @@
 package controller;
 
-import java.util.ArrayList;
-
-import model.Direction;
 import model.IGrid;
 import model.ILightCycle;
 import view.IUserOrder;
 import view.IView;
 
 public class TronController implements IOrderPerformer, IController {
-    private static int    TIME_SLEEP = 30;
-    private final IGrid   grid;
-    private final boolean isGameOver = false;
-    private IView         view;
+    private static int  TIME_SLEEP = 30;
+    private final IGrid grid;
+    private boolean     isGameOver = false;
+    private IView       view;
 
     public TronController(final IGrid grid) {
         this.grid = grid;
@@ -21,23 +18,39 @@ public class TronController implements IOrderPerformer, IController {
     @Override
     public void orderPerform(final IUserOrder userOrder) {
         if (userOrder != null) {
-            final ILightCycle lightCycle = this.grid.getLightCycleByPlayer(userOrder.getPlayer());
-            if (lightCycle != null) {
+            final ILightCycle lightcycle = this.grid.getLightCycleByPlayer(userOrder.getPlayer());
+            if (lightcycle != null) {
                 int direction;
                 switch (userOrder.getOrder()) {
                 case RIGHT:
-                    direction = (Direction.RIGHT.ordinal() + 1) % 4;
+                    direction = (lightcycle.setDirection(
+                            ((this.grid.getLightCycleByPlayer(userOrder.getPlayer()).getDirection() + 1) + 4) % 4));
                     break;
                 case LEFT:
-                    direction = (Direction.LEFT.ordinal() - 1) % 4;
+                    direction = (lightcycle.setDirection(
+                            ((this.grid.getLightCycleByPlayer(userOrder.getPlayer()).getDirection() - 1) + 4) % 4));
                     break;
                 case NOP:
                 default:
-                    direction = this.grid.getLightCycleByPlayer(userOrder.getPlayer()).getDirection();
+                    direction = lightcycle
+                            .setDirection(this.grid.getLightCycleByPlayer(userOrder.getPlayer()).getDirection());
                     break;
-                }
-                lightCycle.setDirection(direction);
 
+                }
+
+                System.out.println(direction);
+                lightcycle.setDirection(direction);
+            }
+        }
+    }
+
+    @Override
+    public void checkCollision() {
+        for (int player = 0; player < 2; player++) {
+            if (this.grid.getMatrixXY(this.grid.getLightCycleByPlayer(player).getPosition().getX(),
+                    this.grid.getLightCycleByPlayer(player).getPosition().getY()).isWall()) {
+                this.grid.getLightCycleByPlayer(player).die();
+                this.isGameOver = true;
             }
         }
     }
@@ -45,7 +58,13 @@ public class TronController implements IOrderPerformer, IController {
     @Override
     public void play() {
         this.gameLoop();
-        this.view.displayMessage("Game Over");
+        if (!this.grid.getLightCycleByPlayer(0).isAlive() && !this.grid.getLightCycleByPlayer(1).isAlive()) {
+            this.view.displayMessage("Tie !!! Replay");
+        } else if (!this.grid.getLightCycleByPlayer(0).isAlive()) {
+            this.view.displayMessage("Player 2 wins");
+        } else if (!this.grid.getLightCycleByPlayer(1).isAlive()) {
+            this.view.displayMessage("Player 1 wins");
+        }
         this.view.closeAll();
     }
 
@@ -57,14 +76,10 @@ public class TronController implements IOrderPerformer, IController {
             } catch (final InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-
-            final ArrayList<ILightCycle> initialLightCycles = new ArrayList<ILightCycle>();
-            for (final ILightCycle lightCycle : this.grid.getLightCycle()) {
-                initialLightCycles.add(lightCycle);
-                this.grid.addWall(0);
-                this.grid.addWall(1);
-            }
-            for (final ILightCycle lightCycle : initialLightCycles) {
+            this.checkCollision();
+            this.grid.addWall(0);
+            this.grid.addWall(1);
+            for (final ILightCycle lightCycle : this.grid.getLightCycles()) {
                 lightCycle.move();
             }
             this.grid.setLightCyclesHaveMoved();

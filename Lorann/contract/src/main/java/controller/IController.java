@@ -13,6 +13,8 @@ public interface IController {
 
     public void orderPerform(final IUserOrder userOrder);
 
+    public void checkCollision();
+
     public void play();
 
     public void gameLoop();

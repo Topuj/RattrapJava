@@ -7,7 +7,7 @@ public class LightCycle implements ILightCycle {
     private final Color color;
     private IPosition   position;
     private IGrid       grid;
-    private final int   direction;
+    private int         direction;
     private final int   player;
 
     public LightCycle(final int direction, final IPosition position, final Color color, final int player) {
@@ -16,11 +16,10 @@ public class LightCycle implements ILightCycle {
         this.position = position;
         this.alive = true;
         this.player = player;
-
     }
 
     @Override
-    public Boolean getAlive() {
+    public Boolean isAlive() {
         return this.alive;
     }
 
@@ -56,13 +55,13 @@ public class LightCycle implements ILightCycle {
     }
 
     private void moveUp() {
-        this.position.setY(this.position.getY() + 1);
+        this.position.setY(this.position.getY() - 1);
         // TODO Auto-generated method stub
 
     }
 
     private void moveDown() {
-        this.position.setY(this.position.getY() - 1);
+        this.position.setY(this.position.getY() + 1);
         // TODO Auto-generated method stub
 
     }
@@ -85,8 +84,8 @@ public class LightCycle implements ILightCycle {
     }
 
     @Override
-    public void setDirection(final int direction) {
-        // TODO Auto-generated method stub
+    public int setDirection(final int direction) {
+        return this.direction = direction;
 
     }
 
