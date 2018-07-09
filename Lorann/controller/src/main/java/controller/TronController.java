@@ -40,7 +40,6 @@ public class TronController implements IOrderPerformer, IController {
 
                 }
 
-                System.out.println(direction);
                 lightcycle.setDirection(direction);
             }
         }
@@ -63,6 +62,7 @@ public class TronController implements IOrderPerformer, IController {
         this.gameLoop();
         if (!this.grid.getLightCycleByPlayer(0).isAlive() && !this.grid.getLightCycleByPlayer(1).isAlive()) {
             this.view.displayMessage("Tie !!! Replay");
+            this.grid.setResult(0, (System.currentTimeMillis() - begin) / 1000);
         } else if (!this.grid.getLightCycleByPlayer(0).isAlive()) {
             this.view.displayMessage("Player 2 wins");
             this.grid.setResult(2, (System.currentTimeMillis() - begin) / 1000);
